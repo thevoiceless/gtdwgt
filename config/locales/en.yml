@@ -2,4 +2,14 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        password_digest: "Password"
+
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              invalid: "must be a Gmail address"
