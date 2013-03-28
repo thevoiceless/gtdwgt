@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   # used by the index is guaranteed to work correctly
   # Explanation for this caveat can be found at http://ruby.railstutorial.org/chapters/modeling-users#sec-uniqueness_validation
   before_save { |user| user.email = email.downcase }
+  # TODO: Only store domain as lowercase; everything before the '@' is case-sensitive according to the standard
+  # See http://email.about.com/od/emailbehindthescenes/f/email_case_sens.htm
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@gmail.com\z/i
 
