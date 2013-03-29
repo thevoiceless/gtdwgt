@@ -62,7 +62,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        flash[:sucess] = 'Profile updated successfully.'
+        # Sign in as part of a successful update
+        # The remember token gets reset when the user is saved, which invalidates the user’s session 
+        # This is a security feature; any hijacked sessions will automatically expire when the user information is changed
+        sign_in @user
+        format.html { redirect_to @user }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
