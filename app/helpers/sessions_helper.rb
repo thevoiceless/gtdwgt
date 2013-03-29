@@ -15,4 +15,9 @@ module SessionsHelper
 		# On subsequent invocations returns @current_user without hitting the database
 		@current_user ||= User.find_by_remember_token(cookies[:remember_token])
 	end
+
+	# Is there a user signed in?
+	def signed_in?
+		!current_user.nil?
+	end
 end
