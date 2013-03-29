@@ -1,6 +1,13 @@
-<h1>Editing user</h1>
+<% provide(:title, "Edit Profile") %>
+<h1>Edit Your Profile</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for(@user) do |f| %>
+			<%= render 'fields', f: f %>
+			<div class="center">
+				<%= f.submit "Save Information", class: "btn btn-large btn-primary" %>
+			</div>
+		<% end %>
+	</div>
+</div>
