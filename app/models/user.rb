@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   # TODO: Only store domain as lowercase; everything before the '@' is case-sensitive according to the standard
   # See http://email.about.com/od/emailbehindthescenes/f/email_case_sens.htm
   before_save { |user| user.email = email.downcase }
-  before_save { :create_remember_token }
+  before_save :create_remember_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@gmail.com\z/i
 
