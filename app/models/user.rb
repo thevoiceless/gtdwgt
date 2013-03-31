@@ -2,12 +2,16 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  email           :string(255)
-#  password_digest :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  remember_token  :string(255)
+#  id                 :integer          not null, primary key
+#  email              :string(255)
+#  password_digest    :string(255)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  remember_token     :string(255)
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
 #
 
 class User < ActiveRecord::Base
@@ -23,6 +27,7 @@ class User < ActiveRecord::Base
   # See http://email.about.com/od/emailbehindthescenes/f/email_case_sens.htm
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
+  # http://stackoverflow.com/questions/4435826/rails-paperclip-how-to-delete-attachment
   before_save :delete_photo?
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@gmail.com\z/i
