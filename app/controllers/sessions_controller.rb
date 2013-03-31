@@ -8,12 +8,12 @@ class SessionsController < ApplicationController
 		if user && user.authenticate(params[:session][:password])
 			# Sign in and redirect to the user's profile
 			sign_in user
-			redirect_to user
+			redirect_back_or user
 		else
 			# Show an error message and display the signin form again
 			# Using 'render' does not count as a request, so using the regular flash would persist one request longer than desired
 			# Instead, use flash.now to display the error until the next request
-			flash.now[:error] = 'Invalid email/password combination'
+			flash.now[:error] = 'Invalid email/password combination.'
 			render 'new'
 		end
 	end

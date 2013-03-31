@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:edit, :update]
-  before_filter :correct_user, only: [:edit, :update]
+  before_filter :signed_in_user, only: [:edit, :update, :destroy]
+  before_filter :correct_user, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -84,7 +84,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
+    # The following line was moved to correct_user, applied via before-filter
+    # @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|
@@ -96,13 +97,19 @@ class UsersController < ApplicationController
   private
 
     def signed_in_user
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in." unless signed_in?
+      end
     end
 
     # Check if the user is allowed to perform an action
     def correct_user
       @user = User.find(params[:id])
       # current_user?(user) defined in SessionsHelper
-      redirect_to root_path unless current_user?(@user)
+      unless current_user?(@user)
+        flash[:error] = "You don't have permission to do that."
+        redirect_to root_path
+      end
     end
 end
