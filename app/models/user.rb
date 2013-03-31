@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   # See http://email.about.com/od/emailbehindthescenes/f/email_case_sens.htm
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
-  before_save { |user| user.photo = nil if delete_photo == '1' }
+  before_save :delete_photo?
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@gmail.com\z/i
 
@@ -35,5 +35,9 @@ class User < ActiveRecord::Base
 
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64
+    end
+
+    def delete_photo?
+      self.photo = nil if self.delete_photo == "1"
     end
 end
