@@ -20,15 +20,14 @@ class User < ActiveRecord::Base
   has_secure_password
   has_attached_file :photo, styles: { medium: "300x300>", small: "100x100>", tiny: "30x30>" }, default_url: "/images/:style/profile_default.png"
 
-  # Convert email address to lowercase before saving it to the database so that the uniqueness constraint
-  # used by the index is guaranteed to work correctly
-  # Explanation for this caveat can be found at http://ruby.railstutorial.org/chapters/modeling-users#sec-uniqueness_validation
-  # TODO: Only store domain as lowercase; everything before the '@' is case-sensitive according to the standard
-  # See http://email.about.com/od/emailbehindthescenes/f/email_case_sens.htm
-  before_save { |user| user.email = email.downcase }
+  # Convert entire email address to lowercase before saving it to the database
+  # Although the standard states that the local part of the address is case-sensitive, uniequeness is enforced at the database level
+  # This is done using an index, but not all database adapters use case-sensitive indices
+  # In practice, the general consensus seems to be that capitalization does not usually cause issues
+  before_save { |user| user.email.downcase! }
   before_save :create_remember_token
   # http://stackoverflow.com/questions/4435826/rails-paperclip-how-to-delete-attachment
-  before_save :delete_photo?
+  before_save :delete_photo!
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[A-Za-z\d\-.]+\.[A-Za-z]+\z/i
 
@@ -42,7 +41,7 @@ class User < ActiveRecord::Base
       self.remember_token = SecureRandom.urlsafe_base64
     end
 
-    def delete_photo?
+    def delete_photo!
       self.photo = nil if self.delete_photo == "1"
     end
 end
