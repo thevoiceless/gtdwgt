@@ -3,7 +3,12 @@
 
 <div class="row">
 	<div class="span6 offset3">
-		<%= form_for(@user) do |f| %>
+		<%= form_for @user, html: { multipart: true } do |f| %>
+			<div class="center">
+				<%= image_tag @user.photo.url(:medium) %>
+				<%= f.file_field :photo %>
+				<div><%= f.check_box(:delete_photo) %><span class="checkbox-text">Reset photo</span></div>
+			</div>
 			<%= render 'fields', f: f %>
 			<div class="center">
 				<%= f.submit "Save Information", class: "btn btn-large btn-primary" %>

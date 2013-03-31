@@ -92,6 +92,10 @@ input {
 	height: auto;
 }
 
+.checkbox-text {
+	vertical-align: middle;
+}
+
 #error_explanation {
 	color: #f00;
 }
@@ -99,6 +103,11 @@ input {
 .field_with_errors {
 	@extend .control-group;
 	@extend .error;
+}
+
+#user_delete_photo {
+	margin: 0;
+	margin-right: 0.5em;
 }
 
 /* users index */
@@ -114,4 +123,11 @@ input {
 			border-bottom: 1px solid $grayLighter;
 		}
 	}
+}
+
+textarea, input[type="file"] {
+    background-color: white;
+    border: 1px solid rgb(204, 204, 204);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
 }

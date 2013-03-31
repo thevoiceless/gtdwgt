@@ -11,8 +11,10 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :password, :password_confirmation, :photo, :delete_photo
+  attr_accessor :delete_photo
   has_secure_password
+  has_attached_file :photo, styles: { medium: "300x300>", small: "100x100>", tiny: "30x30>" }, default_url: "/images/:style/profile_default.png"
 
   # Convert email address to lowercase before saving it to the database so that the uniqueness constraint
   # used by the index is guaranteed to work correctly
@@ -21,6 +23,7 @@ class User < ActiveRecord::Base
   # See http://email.about.com/od/emailbehindthescenes/f/email_case_sens.htm
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
+  before_save { |user| user.photo = nil if delete_photo == '1' }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@gmail.com\z/i
 

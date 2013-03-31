@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        flash[:sucess] = 'Profile updated.'
+        flash[:success] = 'Profile updated.'
         # Sign in as part of a successful update
         # The remember token gets reset when the user is saved, which invalidates the user’s session 
         # This is a security feature; any hijacked sessions will automatically expire when the user information is changed
