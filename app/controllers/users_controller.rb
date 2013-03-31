@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:edit, :update]
+  before_filter :correct_user, only: [:edit, :update]
 
   # GET /users
   # GET /users.json
@@ -36,7 +37,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    # The following line was moved to correct_user, applied via before-filter
+    # @user = User.find(params[:id])
   end
 
   # POST /users
@@ -60,11 +62,12 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    @user = User.find(params[:id])
+    # The following line was moved to correct_user, applied via before-filter
+    # @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        flash[:sucess] = 'Profile updated successfully.'
+        flash[:sucess] = 'Profile updated.'
         # Sign in as part of a successful update
         # The remember token gets reset when the user is saved, which invalidates the user’s session 
         # This is a security feature; any hijacked sessions will automatically expire when the user information is changed
@@ -94,5 +97,12 @@ class UsersController < ApplicationController
 
     def signed_in_user
       redirect_to signin_url, notice: "Please sign in." unless signed_in?
+    end
+
+    # Check if the user is allowed to perform an action
+    def correct_user
+      @user = User.find(params[:id])
+      # current_user?(user) defined in SessionsHelper
+      redirect_to root_path unless current_user?(@user)
     end
 end
