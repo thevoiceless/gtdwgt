@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   # http://stackoverflow.com/questions/4435826/rails-paperclip-how-to-delete-attachment
   before_save :delete_photo?
 
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@gmail.com\z/i
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[A-Za-z\d\-.]+\.[A-Za-z]+\z/i
 
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX }
   validates :password, length: { minimum: 8 }
