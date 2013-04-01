@@ -5,7 +5,7 @@
 	<div class="span6 offset3">
 		<%= form_for @user, html: { multipart: true } do |f| %>
 			<div class="center">
-				<%= image_tag @user.photo.url(:medium) %>
+				<%= image_tag @user.photo.url(:medium), class: "img-polaroid", id: "profile_picture" %>
 				<%= f.file_field :photo %>
 				<div><%= f.check_box(:delete_photo) %><span class="checkbox-text">Reset photo</span></div>
 			</div>

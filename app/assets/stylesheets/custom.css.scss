@@ -1,6 +1,6 @@
 @import "bootstrap";
 
-/* universal */
+/* Universal */
 
 html {
 	overflow-y: scroll;
@@ -25,7 +25,7 @@ textarea {
 	}
 }
 
-/* typography */
+/* Typography */
 
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1;
@@ -52,7 +52,7 @@ p {
 	line-height: 1.7em;
 }
 
-/* header */
+/* Header */
 
 #logo {
 	float: left;
@@ -71,7 +71,7 @@ p {
 	}
 }
 
-/* miscellaneous */
+/* Miscellaneous */
 
 .debug_dump {
 	margin-left: 5px;
@@ -79,7 +79,7 @@ p {
 	margin-top: 45px;
 }
 
-/* forms */
+/* Forms */
 
 input, textarea, select, .uneditable-input {
 	border: 1px solid #bbb;
@@ -105,6 +105,8 @@ input {
 	@extend .error;
 }
 
+/* Edit profile page */
+
 textarea, input[type="file"] {
 	background-color: white;
 	border: 1px solid rgb(204, 204, 204);
@@ -113,12 +115,16 @@ textarea, input[type="file"] {
 	margin: 0;
 }
 
+#profile_picture {
+	margin-bottom: 0.5em;
+}
+
 #user_delete_photo {
 	margin: 0;
 	margin-right: 0.5em;
 }
 
-/* users index */
+/* List of users */
 
 .users {
 	list-style: none;
