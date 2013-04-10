@@ -10,9 +10,6 @@ class GTasksAPI
 		@client.authorization.redirect_uri = GT_REDIRECT_URI
 		@client.authorization.scope = 'https://www.googleapis.com/auth/tasks'
 
-		puts "secret is #{@client.authorization.client_secret}"
-		puts "redirect is #{@client.authorization.redirect_uri}"
-
 		@gtasks = @client.discovered_api('tasks')
 	end
 

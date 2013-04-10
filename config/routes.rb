@@ -11,6 +11,7 @@ Gtdwgt::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
 
   match '/google_authorization', to: 'google_integrations#request_authorization'
+  match '/check_authorization', to: 'google_integrations#check_authorization'
 
 
   # The priority is based upon order of creation:
