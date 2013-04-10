@@ -1,4 +1,4 @@
-	module SessionsHelper
+module SessionsHelper
 	def sign_in(user)
 		# "Permanent" = Expires 20 years from now
 		cookies.permanent[:remember_token] = user.remember_token

@@ -14,9 +14,10 @@
 #  photo_updated_at   :datetime
 #
 
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base  
   attr_accessible :email, :password, :password_confirmation, :photo, :delete_photo
   attr_accessor :delete_photo
+  attr_encrypted :authorization_code, key: SecureRandom.base64
   has_secure_password
   has_attached_file :photo, styles: { medium: "300x300>", small: "100x100>", tiny: "30x30>" }, default_url: "/images/:style/profile_default.png"
 

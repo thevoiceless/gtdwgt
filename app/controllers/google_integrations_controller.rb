@@ -12,12 +12,13 @@ class GoogleIntegrationsController < ApplicationController
 			flash[:notice] = "You can't manage your tasks until you link to a Google account!"
 		elsif params[:code]
 			flash[:success] = "Successfully linked accounts"
+			current_user.authorization_code = params[:code]
 		else
 			flash[:notice] = "An error occurred"
 			if params[:error]
 				flash[:notice] += ": #{params[:error]}"
 			end
 		end
-		redirect_to root_path
+		redirect_to current_user
 	end
 end
