@@ -5,8 +5,8 @@ require 'google/api_client'
 class GTasksAPI
 	def initialize
 		@@client = Google::APIClient.new(application_name: "GTDWGT", application_version: 1)
-		@@client.authorization.client_secret = 'IKvOgAZlsnBmSRc9t3p6IebY'
-		@@client.authorization.redirect_uri = 'http://localhost:3000/oauth2callback'
+		@@client.authorization.client_secret = GT_CLIENT_SECRET
+		@@client.authorization.redirect_uri = GT_REDIRECT_URI
 		@@client.authorization.scope = 'https://www.googleapis.com/auth/tasks'
 
 		@@gtasks = @@client.discovered_api('tasks')
