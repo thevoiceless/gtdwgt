@@ -1,19 +1,14 @@
 <% provide(:title, "Edit Profile") %>
 
 <%= javascript_include_tag "edit_profile" %>
-<script>
-// $(document).ready(function() {
-// 	$('.nav-tabs').button();
-// 	$('#save_button').click(function() {
-// 		$(this).button('loading')
-// 		});
-// });
-</script>
 
 <h1>Edit Your Profile</h1>
 
 <div class="row">
 	<div class="span6 offset3">
+		<div class="center">
+			<%= button_to "Link to a Google account", google_authorization_path, { class: 'btn' } %>
+		</div>
 		<%= form_for @user, html: { multipart: true } do |f| %>
 			<div class="center">
 				<%= image_tag @user.photo.url(:medium), class: "img-polaroid", id: "profile_picture" %>
