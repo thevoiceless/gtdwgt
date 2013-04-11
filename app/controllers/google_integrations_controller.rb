@@ -3,7 +3,6 @@ class GoogleIntegrationsController < ApplicationController
 
 	def request_authorization
 		@gtapi = GTasksAPI.new
-
 		redirect_to @gtapi.redirect_uri
 	end
 
@@ -13,6 +12,7 @@ class GoogleIntegrationsController < ApplicationController
 		elsif params[:code]
 			flash[:success] = "Successfully linked accounts"
 			current_user.authorization_code = params[:code]
+			@gtapi.get_info_and_tasks
 		else
 			flash[:notice] = "An error occurred"
 			if params[:error]

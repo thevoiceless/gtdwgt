@@ -7,7 +7,11 @@
 <div class="row">
 	<div class="span6 offset3">
 		<div class="center">
-			<%= button_to "Link to a Google account", google_authorization_path, { class: 'btn' } %>
+			<% #if @user.authorization_code %>
+				<%= button_to "Link to a Google account", google_authorization_path, { class: 'btn' } %>
+			<% #else %>
+				<!-- <p>Linked</p> -->
+			<% #end %>
 		</div>
 		<%= form_for @user, html: { multipart: true } do |f| %>
 			<div class="center">
