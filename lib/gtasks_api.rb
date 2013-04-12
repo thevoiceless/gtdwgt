@@ -3,24 +3,36 @@
 require 'google/api_client'
 
 class GTasksAPI
+	# Initiate the API connection
 	def initialize
 		@client = Google::APIClient.new(application_name: "GTDWGT", application_version: 1)
+		# Constants from config/initializers/integration.rb
 		@client.authorization.client_id = GT_CLIENT_ID
 		@client.authorization.client_secret = GT_CLIENT_SECRET
 		@client.authorization.redirect_uri = GT_REDIRECT_URI
+		# Will request user information and tasks
 		@client.authorization.scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/tasks'
 
 		@gtasks = @client.discovered_api('tasks')
 		@info = @client.discovered_api('oauth2')
 	end
 
+	# Return the Google authorization URI
 	def redirect_uri
 		@client.authorization.authorization_uri.to_s
 	end
 
-	def get_info_and_tasks
+	# Attempt to authorize using the given authorization code
+	# TODO: Determine what errors this can throw
+	def authorize(authcode)
+		@client.authorization.code = authcode
+		@client.authorization.fetch_access_token!
+	end
+
+	# Fetch user information, task lists, and tasks
+	def fetch_info_and_tasks
 		@user_info = @client.execute(api_method: @info.userinfo.get).data
-		@task_lists = @lient.execute(api_method: @gtasks.tasklists.list).data.items
+		@task_lists = @client.execute(api_method: @gtasks.tasklists.list).data.items
 		@tasks = Hash.new
 		@task_lists.each do |list|
 			@tasks[list] = @client.execute(api_method: @gtasks.tasks.list, parameters: { 'tasklist' => list.id }).data.items
@@ -28,30 +40,37 @@ class GTasksAPI
 		return @user_info, @task_lists, @tasks
 	end
 
+	# Return current user info
 	def user_info
 		@user_info
 	end
 
-	def get_latest_user_info
+	# Fetch and return latest user info
+	def fetch_latest_user_info
 		@user_info = @client.execute(api_method: @info.userinfo.get).data
 		@user_info
 	end
 
+	# Return current task lists
 	def task_lists
 		@task_lists
 	end
 
-	def get_latest_task_lists
+	# Fetch and return latest task lists
+	def fetch_latest_task_lists
 		@task_lists = @lient.execute(api_method: @gtasks.tasklists.list).data.items
 		@task_lists
 	end
 
+	# Return current tasks
 	def tasks
 		 @tasks
 	end
 
-	def get_latest_tasks
-		get_latest_task_lists
+	# Fetch and return latest tasks
+	# Note: This includes fetching the latests tasks lists
+	def fetch_latest_tasks
+		fetch_latest_task_lists
 		@tasks = Hash.new
 		@task_lists.each do |list|
 			@tasks[list] = @client.execute(api_method: @gtasks.tasks.list, parameters: { 'tasklist' => list.id }).data.items
