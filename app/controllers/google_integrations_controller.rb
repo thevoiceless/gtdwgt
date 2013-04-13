@@ -28,13 +28,14 @@ class GoogleIntegrationsController < ApplicationController
 				puts
 			end
 
-			current_user.linked_email = gtapi.user_info.email
+			current_user.g_email = gtapi.user_info.email
+			current_user.g_name = gtapi.user_info.name
 			current_user.save(:validate => false)
 			sign_in current_user
 
 			puts "Current user is #{current_user}"
 			puts "Their auth code is #{current_user.authorization_code} (should be #{params[:code]})"
-			puts "Their linked email is #{current_user.linked_email} (should be #{gtapi.user_info.email})"
+			puts "Their linked email is #{current_user.g_email} (should be #{gtapi.user_info.email})"
 			puts "*************************************"
 		# Not sure what other errors could occur
 		else

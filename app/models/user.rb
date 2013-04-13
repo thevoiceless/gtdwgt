@@ -17,6 +17,7 @@
 class User < ActiveRecord::Base  
   attr_accessible :email, :password, :password_confirmation, :photo, :delete_photo, :authorization_code, :g_name, :g_email
   attr_accessor :delete_photo
+  attr_encrypted :authorization_code, key: 'CQIoUQRROXeHbicBunrvZw=='
   has_secure_password
   has_attached_file :photo, styles: { medium: "300x300>", small: "100x100>", tiny: "30x30>" }, default_url: "/images/:style/profile_default.png"
 
