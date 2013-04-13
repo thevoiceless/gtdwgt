@@ -1,7 +1,7 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
 	<div class="navbar-inner">
 		<div class="container">
-			<% if signed_in? and current_user.authorization_code %>
+			<% if signed_in? and current_user.access_token %>
 				<%= link_to "GTDWGT", tasks_path, id: "logo" %>
 			<% else %>
 				<%= link_to "GTDWGT", root_path, id: "logo" %>

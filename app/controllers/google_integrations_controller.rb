@@ -12,7 +12,7 @@ class GoogleIntegrationsController < ApplicationController
 		# Allowed access, authorization code is in params
 		elsif params[:code]
 			# Get authorization code from params
-			current_user.authorization_code = params[:code]
+			current_user.access_token = params[:code]
 			# Assign to gtapi and authorize
 			gtapi.authorize(params[:code])
 			# Fetch user info and tasks
