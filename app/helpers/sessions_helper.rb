@@ -4,7 +4,7 @@ module SessionsHelper
 		cookies.permanent[:remember_token] = user.remember_token
 		self.current_user = user
 		if current_user.access_token
-			puts "************* USER HAS TOKEN: #{current_user.access_token} *********************"
+			puts "\n************* USER HAS TOKEN: #{current_user.access_token} *********************"
 			gtapi.set_access_token(current_user.access_token)
 		end
 	end

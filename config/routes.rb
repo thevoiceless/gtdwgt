@@ -13,6 +13,7 @@ Gtdwgt::Application.routes.draw do
   match '/google_authorization', to: 'google_integrations#request_authorization'
   match '/check_authorization', to: 'google_integrations#check_authorization'
 
+  match '/taskinfo', to: 'static_pages#taskinfo'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
