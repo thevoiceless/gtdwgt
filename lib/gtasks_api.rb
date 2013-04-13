@@ -29,6 +29,10 @@ class GTasksAPI
 		@client.authorization.fetch_access_token!
 	end
 
+	def set_access_token(token)
+		@client.authorization.access_token = token
+	end
+
 	# Fetch user information, task lists, and tasks
 	def fetch_info_and_tasks
 		@user_info = @client.execute(api_method: @info.userinfo.get).data
