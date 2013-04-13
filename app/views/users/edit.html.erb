@@ -10,12 +10,7 @@
 			<% if @user.authorization_code.nil? %>
 				<%= button_to "Link to a Google account", google_authorization_path, { class: 'btn' } %>
 			<% else %>
-			<% puts "**********************" %>
-			<% puts @user %>
-			<% p @user %>
-			<% puts @user.authorization_code %>
 				<p>Linked to <%= @user.g_email %></p>
-			<% puts "**********************" %>
 			<% end %>
 		</div>
 		<%= form_for @user, html: { multipart: true } do |f| %>
