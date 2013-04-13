@@ -7,6 +7,7 @@ module SessionsHelper
 
 	def sign_out
 		self.current_user = nil
+		gtapi = nil
 		cookies.delete(:remember_token)
 	end
 
