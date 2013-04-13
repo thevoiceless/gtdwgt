@@ -14,7 +14,6 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'paperclip'
 gem 'google-api-client'
-gem 'attr_encryptor'
 
 # Gems used only for assets and not required
 # in production environments by default.
