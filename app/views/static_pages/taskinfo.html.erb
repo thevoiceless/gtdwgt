@@ -1,1 +1,21 @@
-foo
+<% require 'gtasks_api' %>
+<% gtapi = GTasksAPI.new(current_user.authorization_code, current_user.access_token) %>
+<% gtapi.fetch_latest_everything %>
+<% gtapi.tasks.each_pair do |list, tasks| %>
+<table class="table table-bordered table-condensed">
+	<thead>
+		<tr>
+			<th><%= list.title %></th>
+		</tr>
+	</thead>
+	<tbody>
+	<% tasks.each do |task| %>
+		<tr>
+			<td><%= "#{task.title}" %></td>
+			<td><%= "#{task.status}" %></td>
+			<td><%= "#{task.due}" if task.status == 'needsAction' %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+<% end %>

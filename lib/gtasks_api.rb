@@ -4,7 +4,7 @@ require 'google/api_client'
 
 class GTasksAPI
 	# Initiate the API connection
-	def initialize
+	def initialize(authcode=nil, token=nil)
 		@client = Google::APIClient.new(application_name: "GTDWGT", application_version: 1)
 		# Constants from config/initializers/integration.rb
 		@client.authorization.client_id = GT_CLIENT_ID
@@ -15,6 +15,11 @@ class GTasksAPI
 
 		@gtasks = @client.discovered_api('tasks')
 		@info = @client.discovered_api('oauth2')
+
+		if authcode and token
+			@client.authorization.code = authcode
+			@client.authorization.access_token = token
+		end
 	end
 
 	# Return the Google authorization URI
