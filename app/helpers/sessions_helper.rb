@@ -5,13 +5,13 @@ module SessionsHelper
 		self.current_user = user
 		if current_user.access_token
 			puts "\n************* USER HAS TOKEN: #{current_user.access_token} *********************"
+			gtapi = GTasksAPI.new
 			gtapi.set_access_token(current_user.access_token)
 		end
 	end
 
 	def sign_out
 		self.current_user = nil
-		gtapi = nil
 		cookies.delete(:remember_token)
 	end
 
