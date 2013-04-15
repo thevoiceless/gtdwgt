@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 8 }
   validates :password_confirmation, presence: true
 
+  def authorized_api?
+    self.authorization_code and self.access_token
+  end
+
   private
 
     def create_remember_token
