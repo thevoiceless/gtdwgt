@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413173047) do
+ActiveRecord::Schema.define(:version => 20130415202230) do
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(:version => 20130413173047) do
     t.string   "encrypted_access_token_iv"
     t.string   "g_email"
     t.string   "g_name"
+    t.string   "encrypted_authorization_code"
+    t.string   "encrypted_authorization_code_salt"
+    t.string   "encrypted_authorization_code_iv"
   end
 
 end

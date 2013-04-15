@@ -14,16 +14,15 @@ class GoogleIntegrationsController < ApplicationController
 		# Allowed access, authorization code is in params
 		elsif params[:code]
 			gtapi = GTasksAPI.new
-			# Get authorization code from params
-			current_user.access_token = params[:code]
-			# Assign to gtapi and authorize
-			gtapi.authorize(params[:code])
-			# Fetch user info and tasks
-			gtapi.fetch_info_and_tasks
+			# Set authorization code from params
+			current_user.authorization_code = params[:code]
+			# Authorize
+			current_user.access_token = gtapi.authorize(current_user.authorization_code)
 			flash[:success] = "Successfully linked to #{gtapi.user_info.email} (#{gtapi.user_info.name})"
 			
 			# Debug info
 			puts "*************************************"
+			gtapi.fetch_info_and_tasks
 			gtapi.tasks.each_pair do |list, tasks|
 				puts list.title
 				tasks.each do |task|

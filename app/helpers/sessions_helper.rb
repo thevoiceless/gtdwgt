@@ -3,11 +3,6 @@ module SessionsHelper
 		# "Permanent" = Expires 20 years from now
 		cookies.permanent[:remember_token] = user.remember_token
 		self.current_user = user
-		if current_user.access_token
-			puts "\n************* USER HAS TOKEN: #{current_user.access_token} *********************"
-			gtapi = GTasksAPI.new
-			gtapi.set_access_token(current_user.access_token)
-		end
 	end
 
 	def sign_out

@@ -5,24 +5,28 @@
 #  id                                :integer          not null, primary key
 #  email                             :string(255)
 #  password_digest                   :string(255)
-#  created_at                        :datetime         not null
-#  updated_at                        :datetime         not null
+#  created_at                        :datetime
+#  updated_at                        :datetime
 #  remember_token                    :string(255)
 #  photo_file_name                   :string(255)
 #  photo_content_type                :string(255)
 #  photo_file_size                   :integer
 #  photo_updated_at                  :datetime
-#  encrypted_access_token      :string(255)
-#  encrypted_access_token_salt :string(255)
-#  encrypted_access_token_iv   :string(255)
+#  encrypted_access_token            :string(255)
+#  encrypted_access_token_salt       :string(255)
+#  encrypted_access_token_iv         :string(255)
 #  g_email                           :string(255)
 #  g_name                            :string(255)
+#  encrypted_authorization_code      :string(255)
+#  encrypted_authorization_code_salt :string(255)
+#  encrypted_authorization_code_iv   :string(255)
 #
 
 class User < ActiveRecord::Base  
-  attr_accessible :email, :password, :password_confirmation, :photo, :delete_photo, :access_token, :g_name, :g_email
+  attr_accessible :email, :password, :password_confirmation, :photo, :delete_photo, :authorization_code, :access_token, :g_name, :g_email
   attr_accessor :delete_photo
-  attr_encrypted :access_token, key: 'CQIoUQRROXeHbicBunrvZw=='
+  attr_encrypted :authorization_code, key: 'IBEwvHFjRbvPL+/qhefJGAe/'
+  attr_encrypted :access_token, key: 'CQIoUQRROXeHbicBunrvZw2S'
   has_secure_password
   has_attached_file :photo, styles: { medium: "300x300>", small: "100x100>", tiny: "30x30>" }, default_url: "/images/:style/profile_default.png"
 

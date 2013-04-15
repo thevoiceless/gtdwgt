@@ -22,15 +22,28 @@ class GTasksAPI
 		@client.authorization.authorization_uri.to_s
 	end
 
-	# Attempt to authorize using the given authorization code
+	# Attempt to authorize using the given authorization code, return access token
 	# TODO: Determine what errors this can throw
 	def authorize(authcode)
 		@client.authorization.code = authcode
 		@client.authorization.fetch_access_token!
+		@client.authorization.access_token
 	end
 
-	def set_access_token(token)
+	def authorization_code=(code)
+		@client.authorization.code = code
+	end
+
+	def authorization_code
+		@client.authorization.code
+	end
+
+	def access_token=(token)
 		@client.authorization.access_token = token
+	end
+
+	def access_token
+		@client.authorization.access_token
 	end
 
 	# Fetch user information, task lists, and tasks
