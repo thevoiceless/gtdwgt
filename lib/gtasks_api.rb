@@ -47,7 +47,7 @@ class GTasksAPI
 	end
 
 	# Fetch user information, task lists, and tasks
-	def fetch_info_and_tasks
+	def fetch_latest_everything
 		@user_info = @client.execute(api_method: @info.userinfo.get).data
 		@task_lists = @client.execute(api_method: @gtasks.tasklists.list).data.items
 		@tasks = Hash.new
@@ -59,7 +59,7 @@ class GTasksAPI
 
 	# Return current user info
 	def user_info
-		@user_info
+		@user_info ||= fetch_latest_user_info
 	end
 
 	# Fetch and return latest user info
@@ -70,7 +70,7 @@ class GTasksAPI
 
 	# Return current task lists
 	def task_lists
-		@task_lists
+		@task_lists ||= fetch_latest_task_lists
 	end
 
 	# Fetch and return latest task lists
@@ -81,7 +81,7 @@ class GTasksAPI
 
 	# Return current tasks
 	def tasks
-		 @tasks
+		 @tasks ||= fetch_latest_tasks
 	end
 
 	# Fetch and return latest tasks

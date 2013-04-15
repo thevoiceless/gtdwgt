@@ -22,7 +22,7 @@ class GoogleIntegrationsController < ApplicationController
 			
 			# Debug info
 			puts "*************************************"
-			gtapi.fetch_info_and_tasks
+			gtapi.fetch_latest_everything
 			gtapi.tasks.each_pair do |list, tasks|
 				puts list.title
 				tasks.each do |task|
