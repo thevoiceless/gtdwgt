@@ -1,5 +1,7 @@
+<% provide(:title, "Task Info") %>
 <% require 'gtasks_api' %>
 <% gtapi = GTasksAPI.new(current_user.authorization_code, current_user.access_token) %>
+<h1>Task info fetched via API:</h1>
 <% gtapi.fetch_latest_everything %>
 <% gtapi.tasks.each_pair do |list, tasks| %>
 <table class="table table-bordered table-condensed">
