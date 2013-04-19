@@ -1,1 +1,25 @@
-foo
+<% provide(:title, "Tasks") %>
+
+<% @task_lists.each do |task_list| %>
+<table class="table table-bordered table-condensed">
+	<thead>
+		<tr>
+			<th><%= task_list.title %></th>
+		</tr>
+	</thead>
+	<tbody>
+	<% task_list.tasks.each do |task| %>
+		<tr>
+			<td><%= "#{task.title}" %></td>
+			<td><%= "#{task.completed}" %></td>
+			<td><% if task.due_date %>
+				<%= "#{task.due_date}" %>
+				<% else %>
+				No due date
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+<% end %>

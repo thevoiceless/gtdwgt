@@ -1,19 +1,25 @@
 require 'gtasks_api'
 
 class TaskList
-	def initialize(tasks)
+	attr_accessor :title
+	attr_accessor :updated
+	attr_accessor :tasks
+
+	def initialize(list, tasks)
+		@title = list.title
+		@updated = list.updated
 		@tasks = tasks
 	end
 
 	def self.get_latest_for(user)
+		gtapi = GTasksAPI.new(user.authorization_code, user.access_token)
 		lists = Array.new
-		@gtapi = GTasksAPI.new(user.authorization_code, user.access_token)
-		@gtapi.tasks.each_pair do |list, tasks|
-			t = Array.new
-			tasks.each do |task|
-				t << Task.new(task)
+		gtapi.fetch_latest_task_lists.each do |list|
+			tasks = Array.new
+			gtapi.tasks_for(list).each do |task|
+				tasks << Task.new(task)
 			end
-			lists << TaskList.new(t)
+			lists << TaskList.new(list, tasks)
 		end
 		lists
 	end

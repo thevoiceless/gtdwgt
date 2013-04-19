@@ -18,7 +18,6 @@ class GoogleIntegrationsController < ApplicationController
 			current_user.authorization_code = params[:code]
 			# Authorize
 			current_user.access_token = gtapi.authorize(current_user.authorization_code)
-			flash[:success] = "Successfully linked to #{gtapi.user_info.email} (#{gtapi.user_info.name})"
 			
 			# Debug info
 			# puts "*************************************"
@@ -35,6 +34,7 @@ class GoogleIntegrationsController < ApplicationController
 			current_user.g_email = gtapi.user_info.email
 			current_user.g_name = gtapi.user_info.name
 			current_user.save(:validate => false)
+			flash[:success] = "Successfully linked to #{current_user.g_email} (#{current_user.g_name})"
 			sign_in current_user
 		# Not sure what other errors could occur
 		else

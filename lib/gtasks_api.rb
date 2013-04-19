@@ -20,6 +20,8 @@ class GTasksAPI
 			@client.authorization.code = authcode
 			@client.authorization.access_token = token
 		end
+
+		@tasks = Hash.new
 	end
 
 	# Return the Google authorization URI
@@ -51,6 +53,40 @@ class GTasksAPI
 		@client.authorization.access_token
 	end
 
+	# Return current user info, fetch if it does not exist
+	def user_info
+		@user_info ||= fetch_latest_user_info
+	end
+
+	# Fetch and return latest user info
+	def fetch_latest_user_info
+		@user_info = @client.execute(api_method: @info.userinfo.get).data
+	end
+
+	# Return current task lists, fetch if it does not exist
+	def task_lists
+		@task_lists ||= fetch_latest_task_lists
+	end
+
+	# Fetch and return latest task lists
+	def fetch_latest_task_lists
+		@task_lists = @client.execute(api_method: @gtasks.tasklists.list).data.items
+	end
+
+	# Return the tasks for a list, fetch if it does not exist
+	def tasks_for(list)
+		@tasks[list] ||= fetch_latest_tasks_for(list)
+	end
+
+	# Fetch and return latest tasks for a list
+	def fetch_latest_tasks_for(list)
+		@tasks[list] = @client.execute(api_method: @gtasks.tasks.list, parameters: { 'tasklist' => list.id }).data.items
+	end
+
+	####################################################
+	# Not sure if the functions below are still needed #
+	####################################################
+
 	# Fetch user information, task lists, and tasks
 	def fetch_latest_everything
 		@user_info = @client.execute(api_method: @info.userinfo.get).data
@@ -60,28 +96,6 @@ class GTasksAPI
 			@tasks[list] = @client.execute(api_method: @gtasks.tasks.list, parameters: { 'tasklist' => list.id }).data.items
 		end
 		return @user_info, @task_lists, @tasks
-	end
-
-	# Return current user info
-	def user_info
-		@user_info ||= fetch_latest_user_info
-	end
-
-	# Fetch and return latest user info
-	def fetch_latest_user_info
-		@user_info = @client.execute(api_method: @info.userinfo.get).data
-		@user_info
-	end
-
-	# Return current task lists
-	def task_lists
-		@task_lists ||= fetch_latest_task_lists
-	end
-
-	# Fetch and return latest task lists
-	def fetch_latest_task_lists
-		@task_lists = @lient.execute(api_method: @gtasks.tasklists.list).data.items
-		@task_lists
 	end
 
 	# Return current tasks
