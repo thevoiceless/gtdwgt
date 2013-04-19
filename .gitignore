@@ -19,4 +19,3 @@ pickle-email-*.html
 integration.rb
 aws_s3.rb
 *.jpg
-secret_token.rb
