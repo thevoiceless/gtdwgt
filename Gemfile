@@ -15,6 +15,7 @@ gem 'bootstrap-will_paginate'
 gem 'paperclip'
 gem 'google-api-client'
 gem 'attr_encryptor'
+gem 'aws-sdk'
 
 group :development do
 	gem 'sqlite3'

@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   attr_encrypted :authorization_code, key: 'IBEwvHFjRbvPL+/qhefJGAe/'
   attr_encrypted :access_token, key: 'CQIoUQRROXeHbicBunrvZw2S'
   has_secure_password
-  has_attached_file :photo, styles: { medium: "300x300>", small: "100x100>", tiny: "30x30>" }, default_url: "/images/:style/profile_default.png"
+  has_attached_file :photo, path: "cs446/moses/#{Rails.env}:url", styles: { medium: "300x300>", small: "100x100>", tiny: "30x30>" }, default_url: "/images/:style/profile_default.png"
 
   # Convert entire email address to lowercase before saving it to the database
   # Although the standard states that the local part of the address is case-sensitive, uniequeness is enforced at the database level
