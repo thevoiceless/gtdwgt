@@ -21,16 +21,16 @@ class GoogleIntegrationsController < ApplicationController
 			flash[:success] = "Successfully linked to #{gtapi.user_info.email} (#{gtapi.user_info.name})"
 			
 			# Debug info
-			puts "*************************************"
-			gtapi.fetch_latest_everything
-			gtapi.tasks.each_pair do |list, tasks|
-				puts list.title
-				tasks.each do |task|
-					puts "  #{task.title}"
-				end
-				puts
-			end
-			puts "*************************************"
+			# puts "*************************************"
+			# gtapi.fetch_latest_everything
+			# gtapi.tasks.each_pair do |list, tasks|
+			# 	puts list.title
+			# 	tasks.each do |task|
+			# 		puts "  #{task.title}"
+			# 	end
+			# 	puts
+			# end
+			# puts "*************************************"
 
 			current_user.g_email = gtapi.user_info.email
 			current_user.g_name = gtapi.user_info.name

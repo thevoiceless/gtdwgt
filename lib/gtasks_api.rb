@@ -97,5 +97,6 @@ class GTasksAPI
 		@task_lists.each do |list|
 			@tasks[list] = @client.execute(api_method: @gtasks.tasks.list, parameters: { 'tasklist' => list.id }).data.items
 		end
+		@tasks
 	end
 end

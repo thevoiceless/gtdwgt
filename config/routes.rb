@@ -15,6 +15,8 @@ Gtdwgt::Application.routes.draw do
 
   match '/taskinfo', to: 'static_pages#taskinfo'
 
+  match '/tasks', to: 'task_lists#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
