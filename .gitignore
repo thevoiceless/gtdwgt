@@ -17,3 +17,5 @@ rerun.txt
 pickle-email-*.html
 .project
 integration.rb
+aws_s3.rb
+*.jpg

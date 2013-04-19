@@ -1,5 +1,13 @@
 Gtdwgt::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  config.paperclip_defaults = {
+  :storage => :s3,
+  :s3_credentials => {
+    :bucket => 'mines.edu',
+    :access_key_id => ENV['S3_KEY'],
+    :secret_access_key => ENV['S3_SECRET']
+    }
+  }
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
