@@ -9,7 +9,7 @@ class GTasksAPI
 		# Constants from config/initializers/integration.rb
 		@client.authorization.client_id = ENV['GT_CLIENT_ID'] || GT_CLIENT_ID
 		@client.authorization.client_secret = ENV['GT_CLIENT_SECRET'] || GT_CLIENT_SECRET
-		@client.authorization.redirect_uri = ENV['GT_REDIRECT_URI'] || GT_REDIRECT_URI
+		@client.authorization.redirect_uri = ENV['GT_REDIRECT_URI_PRODUCTION'] || GT_REDIRECT_URI
 		# Will request user information and tasks
 		@client.authorization.scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/tasks'
 
