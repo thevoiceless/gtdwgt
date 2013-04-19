@@ -96,6 +96,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.0)
       mime-types
+    pg (0.15.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -163,6 +164,7 @@ DEPENDENCIES
   google-api-client
   jquery-rails
   paperclip
+  pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sqlite3
