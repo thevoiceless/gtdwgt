@@ -6,6 +6,7 @@ Gtdwgt::Application.configure do
     :bucket => 'mines.edu',
     :access_key_id => ENV['S3_KEY'],
     :secret_access_key => ENV['S3_SECRET']
+    }
   }
 
 
