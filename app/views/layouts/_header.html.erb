@@ -2,7 +2,7 @@
 	<div class="navbar-inner">
 		<div class="container">
 			<% if signed_in? and current_user.authorized_api? %>
-				<%= link_to "GTDWGT", taskinfo_path, id: "logo" %>
+				<%= link_to "GTDWGT", tasks_path, id: "logo" %>
 			<% else %>
 				<%= link_to "GTDWGT", root_path, id: "logo" %>
 			<% end %>

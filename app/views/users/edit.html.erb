@@ -7,10 +7,11 @@
 <div class="row">
 	<div class="span6 offset3">
 		<div class="center">
-			<% if @user.access_token.nil? %>
+			<% if not @user.authorized_api? %>
 				<%= button_to "Link to a Google account", google_authorization_path, { class: 'btn' } %>
 			<% else %>
 				<p>Linked to <%= @user.g_email %></p>
+				<%= button_to "Unlink", unlink_path, { class: 'btn' } %>
 			<% end %>
 		</div>
 		<%= form_for @user, html: { multipart: true } do |f| %>

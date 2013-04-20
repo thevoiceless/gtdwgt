@@ -42,6 +42,18 @@ class UsersController < ApplicationController
     # @user = User.find(params[:id])
   end
 
+  def unlink
+    current_user.authorization_code = nil
+    current_user.access_token = nil
+    if current_user.save(:validate => false)
+      flash[:success] = "Your account is no longer linked to Google"
+      sign_in current_user
+    else
+      flash[:error] = "Error unlinking accounts"
+    end
+    redirect_to current_user
+  end
+
   # POST /users
   # POST /users.json
   def create

@@ -6,6 +6,8 @@ Gtdwgt::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
+  match '/unlink', to: 'users#unlink'
+
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
@@ -13,9 +15,7 @@ Gtdwgt::Application.routes.draw do
   match '/google_authorization', to: 'google_integrations#request_authorization'
   match '/check_authorization', to: 'google_integrations#check_authorization'
 
-  # match '/taskinfo', to: 'static_pages#taskinfo'
-
-  match '/taskinfo', to: 'task_lists#index'
+  match '/tasks', to: 'task_lists#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
