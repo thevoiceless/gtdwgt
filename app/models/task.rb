@@ -8,8 +8,9 @@ class Task
 
 	def initialize(task)
 		@title = task.title
-		@notes = task.notes
+		@notes = task.notes ? task.notes : nil
 		@updated = task.updated
+		
 		@completed = true ? task.status == 'completed' : false
 		@due_date = task.due ? task.due : nil
 		@completed_date = task.completed ? task.completed : nil

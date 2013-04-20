@@ -10,9 +10,16 @@
 	<tbody>
 	<% task_list.tasks.each do |task| %>
 		<tr>
-			<td><%= "#{task.title}" %></td>
+			<td>
+				<%= "#{task.title}" %>
+				<% if task.notes %>
+				<br/>
+				<%= "#{task.notes}" %>
+				<% end %>
+			</td>
 			<td><%= "#{task.completed}" %></td>
-			<td><% if task.due_date %>
+			<td>
+				<% if task.due_date %>
 				<%= "#{task.due_date}" %>
 				<% else %>
 				No due date
