@@ -1,7 +1,7 @@
 Gtdwgt::Application.routes.draw do  
   root to: 'static_pages#home'
 
-  get "static_pages/home"
+  get 'static_pages/home'
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
@@ -16,6 +16,8 @@ Gtdwgt::Application.routes.draw do
   match '/check_authorization', to: 'google_integrations#check_authorization'
 
   match '/tasks', to: 'task_lists#index'
+
+  get 'task_lists/new_task'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
