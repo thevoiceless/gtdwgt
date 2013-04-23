@@ -1,11 +1,13 @@
 require 'gtasks_api'
 
 class TaskList
+	attr_accessor :id
 	attr_accessor :title
 	attr_accessor :updated
 	attr_accessor :tasks
 
 	def initialize(list, tasks)
+		@id = list.id
 		@title = list.title
 		@updated = list.updated
 		@tasks = tasks
