@@ -28,6 +28,11 @@ class Task
 		representation['due'] = "#{@due_date}" if @due_date
 		representation['completed'] = "#{@completed_date}" if @completed_date
 
+		# Convert
+		#   \" to '
+		# and
+		#   => to :
+		# to mach the required resource representation
 		representation.to_s.gsub(/\"/, '\'').gsub(/\=>/, ': ')
 	end
 
