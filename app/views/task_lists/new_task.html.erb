@@ -2,6 +2,9 @@
 
 <%= form_tag(:controller => 'task_lists', :action => 'add_task_to_list', :method => 'post') do %>
 <div>
+	List: <%= select :list, :list_id, @task_lists.collect { |t| [ t.title, t.id ] } %>
+</div>
+<div>
 	Title: <%= text_field_tag "title" %>
 </div>
 <div>

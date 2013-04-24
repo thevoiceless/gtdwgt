@@ -70,7 +70,10 @@ class GTasksAPI
 
 	# Fetch and return latest task lists
 	def fetch_latest_task_lists
-		@task_lists = @client.execute(api_method: @gtasks.tasklists.list).data.items
+		response = @client.execute(api_method: @gtasks.tasklists.list)
+		puts "***************** ERROR FETCHING TASK LISTS *****************" if response.status != 200
+		p response
+		@task_lists = response.data.items
 	end
 
 	# Return the tasks for a list, fetch if it does not exist
@@ -81,6 +84,20 @@ class GTasksAPI
 	# Fetch and return latest tasks for a list
 	def fetch_latest_tasks_for(list)
 		@tasks[list] = @client.execute(api_method: @gtasks.tasks.list, parameters: { 'tasklist' => list.id }).data.items
+	end
+
+	def add_task_to_list(list_id, task_resource)
+		puts "**************** ADDING TASK TO LIST ********************"
+		puts "List ID:"
+		list_id
+		puts "Task resource:"
+		task_resource
+		response = @client.execute(api_method: @gtasks.tasks.insert, parameters: { 'tasklist' => list_id }, headers: { 'Content-Type' => 'application/json' }, body: task_resource)
+		puts "Response: #{response.status}"
+		if response.status != 200
+			puts "***************** ERROR ADDING TASK *****************"
+			p response
+		end
 	end
 
 	####################################################
@@ -96,21 +113,5 @@ class GTasksAPI
 			@tasks[list] = @client.execute(api_method: @gtasks.tasks.list, parameters: { 'tasklist' => list.id }).data.items
 		end
 		return @user_info, @task_lists, @tasks
-	end
-
-	# Return current tasks
-	def tasks
-		 @tasks ||= fetch_latest_tasks
-	end
-
-	# Fetch and return latest tasks
-	# Note: This includes fetching the latests tasks lists
-	def fetch_latest_tasks
-		fetch_latest_task_lists
-		@tasks = Hash.new
-		@task_lists.each do |list|
-			@tasks[list] = @client.execute(api_method: @gtasks.tasks.list, parameters: { 'tasklist' => list.id }).data.items
-		end
-		@tasks
 	end
 end

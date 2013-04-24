@@ -15,6 +15,22 @@ class Task
 		@completed_date = nil
 	end
 
+	# https://developers.google.com/google-apps/tasks/v1/reference/tasks#resource
+	def resource_representation
+		representation = Hash.new
+
+		representation['title'] = "#{@title}" if @title
+		representation['notes'] = "#{@notes}" if @notes
+		representation['updated'] = "#{@updated}" if @updated
+		if !@completed.nil?
+			representation['status'] = "completed" ? @completed : "needsAction"
+		end
+		representation['due'] = "#{@due_date}" if @due_date
+		representation['completed'] = "#{@completed_date}" if @completed_date
+
+		representation.to_s.gsub(/\"/, '\'').gsub(/\=>/, ': ')
+	end
+
 	def self.new_from_task(task)
 		t = Task.new()
 		t.title = task.title
