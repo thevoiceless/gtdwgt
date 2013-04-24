@@ -10,9 +10,8 @@ class TaskListsController < ApplicationController
 	end
 
 	def add_task_to_list
-		puts "**********************"
-		puts params
-		puts "**********************"
+		@task = Task.new_from_params(params)
+		p @task
 		redirect_to tasks_path
 	end
 end

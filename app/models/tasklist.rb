@@ -19,7 +19,7 @@ class TaskList
 		gtapi.fetch_latest_task_lists.each do |list|
 			tasks = Array.new
 			gtapi.tasks_for(list).each do |task|
-				tasks << Task.new(task)
+				tasks << Task.new_from_task(task)
 			end
 			lists << TaskList.new(list, tasks)
 		end
