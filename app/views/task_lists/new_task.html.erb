@@ -5,12 +5,12 @@
 	List: <%= select :list, :list_id, @task_lists.collect { |t| [ t.title, t.id ] } %>
 </div>
 <div>
-	Title: <%= text_field_tag "title" %>
+	Title: <%= text_field_tag "title", nil, { class: "boxsizingBorder" } %>
 </div>
-<div>
-	Notes: <%= text_field_tag "notes" %>
+<div id="notes-area">
+	Notes: <%= text_area_tag "notes", nil, { class: "boxsizingBorder" } %>
 </div>
 <div class="center">
-	<%= submit_tag 'Save', { class: 'btn btn-success' } %>
+	<%= submit_tag 'Save', { class: 'btn btn-success btn-large' } %>
 </div>
 <% end %>
