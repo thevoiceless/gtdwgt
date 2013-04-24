@@ -1,6 +1,6 @@
 <% provide(:title, "Tasks") %>
 
-<%= button_to "New Task", task_lists_new_task_path, { class: "btn btn-primary" } %>
+<%= button_to "New Task", new_task_path, { method: :get, class: "btn btn-primary" } %>
 
 <% @task_lists.each do |task_list| %>
 <table class="table table-bordered table-condensed">

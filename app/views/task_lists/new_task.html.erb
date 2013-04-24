@@ -1,0 +1,13 @@
+<% provide(:title, "New Task") %>
+
+<%= form_tag(:controller => 'task_lists', :action => 'add_task_to_list', :method => 'post') do %>
+<div>
+	Title: <%= text_field_tag "title" %>
+</div>
+<div>
+	Notes: <%= text_field_tag "notes" %>
+</div>
+<div>
+	<%= submit_tag 'Submit' %>
+</div>
+<% end %>
