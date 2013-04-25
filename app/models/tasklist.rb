@@ -28,8 +28,6 @@ class TaskList
 
 	def self.add_task_to_list(user, list_id, task_resource)
 		gtapi = GTasksAPI.new(user.authorization_code, user.access_token)
-		puts "List id in TaskList: #{list_id}"
-		puts "Task resource in TaskList: #{task_resource}"
 		gtapi.add_task_to_list(list_id, task_resource)
 	end
 end

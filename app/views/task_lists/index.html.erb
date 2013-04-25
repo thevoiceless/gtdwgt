@@ -1,7 +1,11 @@
 <% provide(:title, "Tasks") %>
 
 <div class="center">
+	<% if @task_lists.size == 0 %>
+	<%= button_to "Re-link (temporary)", google_authorization_path, { class: 'btn' } %>
+	<% else %>
 	<%= button_to "New Task", new_task_path, { method: :get, class: "btn btn-info btn-large" } %>
+	<% end %>
 </div>
 
 <% @task_lists.each do |task_list| %>

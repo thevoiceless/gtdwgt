@@ -72,7 +72,7 @@ class GTasksAPI
 	def fetch_latest_task_lists
 		response = @client.execute(api_method: @gtasks.tasklists.list)
 		puts "***************** ERROR FETCHING TASK LISTS *****************" if response.status != 200
-		p response
+		puts response.body
 		@task_lists = response.data.items
 	end
 
