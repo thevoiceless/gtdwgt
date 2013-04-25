@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 			<th>Title</th>
-			<th>Completed?</th>
+			<th>Status</th>
 			<th>Due</th>
 		</tr>
 	</thead>
@@ -26,10 +26,10 @@
 				<%= "#{task.notes}" %>
 				<% end %>
 			</td>
-			<td><%= "#{task.completed}" %></td>
+			<td><%= "#{task.status}" %></td>
 			<td>
 				<% if task.due_date %>
-				<%= "#{task.due_date}" %>
+				<%= "#{task.pretty_due_date}" %>
 				<% else %>
 				No due date
 				<% end %>

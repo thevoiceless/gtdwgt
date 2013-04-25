@@ -10,7 +10,10 @@ class Task
 	# However, they will not accept it unless the time zone is written as '.000Z'
 	# This does not appear to match the RFC3339 format for UTC timestamps
 	# As a result, this format string must be passed to DateTime.strftime instead
-	GOOGLE_RFC3339 = '%Y-%m-%dT%H:%M:%S.000Z'
+	GOOGLE_RFC3339_FORMAT = '%Y-%m-%dT%H:%M:%S.000Z'
+	# More readable date format
+	# {day of week}, {month} {day of month}, {year}
+	PRETTY_DATE_FORMAT = '%A, %B %e, %Y'
 
 	def initialize()
 		@title = nil
@@ -29,7 +32,7 @@ class Task
 		representation['notes'] = "#{@notes}" if @notes
 		representation['updated'] = "#{@updated}" if @updated
 		if !@completed.nil?
-			representation['status'] = "completed" ? @completed : "needsAction"
+			representation['status'] = @completed ? "completed" : "needsAction"
 		end
 		representation['due'] = "#{@due_date}" if @due_date
 		representation['completed'] = "#{@completed_date}" if @completed_date
@@ -40,6 +43,14 @@ class Task
 		#   => to :
 		# to mach the required resource representation
 		representation.to_s.gsub(/\"/, '\'').gsub(/\=>/, ': ')
+	end
+
+	def pretty_due_date
+		DateTime.parse(@due_date.to_s).strftime(PRETTY_DATE_FORMAT)
+	end
+
+	def status
+		status = @completed ? "Done" : "Incomplete"
 	end
 
 	def self.new_from_task(task)
@@ -58,8 +69,8 @@ class Task
 		t = Task.new()
 		t.title = params[:title]
 		t.notes = params[:notes]
-		t.due_date = DateTime.strptime(params[:due_date], '%A, %B %e, %Y').strftime(GOOGLE_RFC3339)
-		t.updated = DateTime.now.strftime(GOOGLE_RFC3339)
+		t.due_date = DateTime.strptime(params[:due_date], PRETTY_DATE_FORMAT).strftime(GOOGLE_RFC3339_FORMAT)
+		t.updated = DateTime.now.strftime(GOOGLE_RFC3339_FORMAT)
 
 		t
 	end
