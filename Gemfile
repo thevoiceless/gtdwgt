@@ -16,6 +16,7 @@ gem 'paperclip'
 gem 'google-api-client'
 gem 'attr_encryptor'
 gem 'aws-sdk'
+gem 'jquery-ui-rails'
 
 group :development do
 	gem 'sqlite3'
