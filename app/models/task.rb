@@ -6,6 +6,12 @@ class Task
 	attr_accessor :due_date
 	attr_accessor :completed_date
 
+	# Google supposedly requires a valid RFC3339 timestamp
+	# However, they will not accept it unless the time zone is written as '.000Z'
+	# This does not appear to match the RFC3339 format for UTC timestamps
+	# As a result, this format string must be passed to DateTime.strftime instead
+	GOOGLE_RFC3339 = '%Y-%m-%dT%H:%M:%S.000Z'
+
 	def initialize()
 		@title = nil
 		@notes = nil
@@ -52,8 +58,8 @@ class Task
 		t = Task.new()
 		t.title = params[:title]
 		t.notes = params[:notes]
-		t.due_date = DateTime.strptime(params[:due_date], '%A, %B %e, %Y').strftime('%Y-%m-%dT%H:%M:%S.000Z')
-		t.updated = DateTime.now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+		t.due_date = DateTime.strptime(params[:due_date], '%A, %B %e, %Y').strftime(GOOGLE_RFC3339)
+		t.updated = DateTime.now.strftime(GOOGLE_RFC3339)
 
 		t
 	end
