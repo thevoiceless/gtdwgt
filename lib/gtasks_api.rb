@@ -88,10 +88,8 @@ class GTasksAPI
 
 	def add_task_to_list(list_id, task_resource)
 		puts "**************** ADDING TASK TO LIST ********************"
-		puts "List ID:"
-		list_id
-		puts "Task resource:"
-		task_resource
+		puts "List ID: #{list_id}"
+		puts "Task resource: #{task_resource}"
 		response = @client.execute(api_method: @gtasks.tasks.insert, parameters: { 'tasklist' => list_id }, headers: { 'Content-Type' => 'application/json' }, body: task_resource)
 		puts "Response: #{response.status}"
 		if response.status != 200

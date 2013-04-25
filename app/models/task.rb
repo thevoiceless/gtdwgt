@@ -52,6 +52,8 @@ class Task
 		t = Task.new()
 		t.title = params[:title]
 		t.notes = params[:notes]
+		t.due_date = DateTime.strptime(params[:due_date], '%A, %B %e, %Y').strftime('%Y-%m-%dT%H:%M:%S.000Z')
+		t.updated = DateTime.now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
 
 		t
 	end

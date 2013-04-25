@@ -1,11 +1,22 @@
 <% provide(:title, "New Task") %>
 
+<script>
+$(document).ready(function() {
+	$('.datepicker').datepicker({ dateFormat: "DD, MM d, yy" });
+});
+</script>
+
 <%= form_tag(:controller => 'task_lists', :action => 'add_task_to_list', :method => 'post') do %>
 <div>
 	List: <%= select :list, :list_id, @task_lists.collect { |t| [ t.title, t.id ] } %>
 </div>
-<div>
-	Title: <%= text_field_tag "title", nil, { class: "boxsizingBorder" } %>
+<div class="two-cols">
+	<span>
+		Title: <%= text_field_tag "title", nil, { class: "boxsizingBorder" } %>
+	</span>
+	<span>
+		Due: <%= text_field_tag "due_date", nil, { class: "boxsizingBorder datepicker" } %>
+	</span>
 </div>
 <div id="notes-area">
 	Notes: <%= text_area_tag "notes", nil, { class: "boxsizingBorder" } %>

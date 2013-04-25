@@ -13,7 +13,7 @@ class TaskListsController < ApplicationController
 		@task = Task.new_from_params(params)
 		puts "\n********************"
 		puts "Params: #{params}"
-		puts "List ID: #{params[:list][:list_id]}"
+		puts "List ID: #{params[:list][:list_id]}" if params[:list]
 		puts @task.resource_representation
 		puts "********************"
 		TaskList.add_task_to_list(current_user, params[:list][:list_id], @task.resource_representation)

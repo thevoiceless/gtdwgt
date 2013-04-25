@@ -165,12 +165,21 @@ select {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-// Fix input height when applying boxsizingBorder
-input[type="text"] {
-	height: auto;
-}
 
 select:focus {
 	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(82, 168, 236, 0.6);
     transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+}
+
+.two-cols {
+	column-count: 2;
+	-moz-column-count: 2;
+	-webkit-column-count: 2;
+}
+
+/* Other */
+
+// Fix input height when applying boxsizingBorder
+input[type="text"] {
+	height: auto;
 }
