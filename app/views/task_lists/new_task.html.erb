@@ -1,10 +1,6 @@
 <% provide(:title, "New Task") %>
 
-<script>
-$(document).ready(function() {
-	$('.datepicker').datepicker({ dateFormat: "DD, MM d, yy" });
-});
-</script>
+<%= javascript_include_tag "new_task" %>
 
 <%= form_tag(:controller => 'task_lists', :action => 'add_task_to_list', :method => 'post') do %>
 <div>
