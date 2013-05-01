@@ -1,4 +1,4 @@
-<div class="center hero-unit">
+<div class="center hero-unit well">
 	<h1>Welcome to GTDWGT</h1>
 	<h4>GTDWGT integrates with Google Tasks to help you focus on getting things done. Rather than being tacked on to Google Calendar, GTDWGT puts Google Tasks front and center so that you can easily manage what you need to do.</h4>
 	<h2><a href="https://github.com/thevoiceless/gtdwgt">https://github.com/thevoiceless/gtdwgt</a></h2>
@@ -6,4 +6,9 @@
 	<% if !signed_in? %>
 		<%= link_to "Sign Up", signup_path, class: "btn btn-large btn-primary" %>
 	<% end %>
+</div>
+
+<div class="center well">
+	<h4>A joke:</h4>
+	<h5><%= @joke.body %></h5>
 </div>
